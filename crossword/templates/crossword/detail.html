@@ -1,0 +1,87 @@
+{% extends 'crossword/base.html' %}
+{% load static %}
+
+{% block head %}
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- p5.js libraries -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/p5.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/addons/p5.dom.js"></script>
+<!-- Crossword JavaScript -->
+<link rel="stylesheet" type="text/css" href="{% static 'crossword/xwordCSS.css' %}" />
+<script language="javascript" type="text/javascript" src="{% static 'crossword/sketch.js' %}"></script>
+<script language="javascript" type="text/javascript" src="{% static 'crossword/cell.js' %}"></script>
+<script language="javascript" type="text/javascript" src="{% static 'crossword/getWords.js' %}"></script>
+<script language="javascript" type="text/javascript" src="{% static 'crossword/listeners.js' %}"></script>
+<!-- Styling and CSS -->
+<style> body {padding: 10; margin: 10;} </style>
+{% endblock %}
+
+{% block body %}
+<script>
+  var spots = "{{ puz.spots }}";
+  var ans = "{{ puz.ans }}";
+  var acrossClues = {{ acrosses|safe }};
+  var downClues = {{ downs|safe }};
+</script>
+
+<div class="container-fluid">
+
+  <center>
+  <table cellpadding="0" cellspacing="0" border="0" width="1000"><tr>
+    <!-- javascript canvas with crossword grid -->
+    <td id = "canvas" width = "460"></td>
+    <td width = "450">
+
+      <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span class="glyphicon glyphicon-check" aria-hidden="true"></span>  Check
+          <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><button type="button" class="btn btn-default editButton" id="checkLetter">Check Letter</button></li>
+            <li><button type="button" class="btn btn-default editButton" id="checkWord">Check Word</a></li>
+            <li><button type="button" class="btn btn-default editButton" id="checkPuzzle">Check Puzzle</a></li>
+          </ul>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>  Reveal
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><button type="button" class="btn btn-default editButton" id="revealLetter">Reveal Letter</a></li>
+          <li><button type="button" class="btn btn-default editButton" id="revealWord">Reveal Word</a></li>
+          <li><button type="button" class="btn btn-default editButton" id="revealPuzzle">Reveal Puzzle</a></li>
+        </ul>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>  Clear
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><button type="button" class="btn btn-default editButton" id="clearLetter">Clear Letter</a></li>
+          <li><button type="button" class="btn btn-default editButton" id="clearWord">Clear Word</a></li>
+          <li><button type="button" class="btn btn-default editButton" id="clearPuzzle">Clear Puzzle</a></li>
+        </ul>
+        </div>
+      </div>
+      <br>
+
+      <center>
+      <!-- table to hold across and down clues -->
+      <table id = "clueTable" cellpadding="0" cellspacing="0" border="0" width="500"><tr>
+        <!-- headings for clues -->
+        <th align="left" class="clueHeading">Across</th><th align="left" class="clueHeading">Down</th></tr><tr>
+        <!-- across clues ordered list -->
+        <td class = "clueData" width="250"><ol id = "across"></ol></td>
+        <!-- down clues ordered list -->
+        <td class = "clueData" width="250"><ol id = "down"></ol></td>
+      </table></center></tr>
+    </td></tr>
+  </table>
+  </center>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+ol {
+  width: 200px;
+  height: 380px;
+  overflow: scroll;
+  display: inline-block;
+}
+
+li {
+  font-family: "Georgia";
+}
+
+.clueHeading {
+  font-family: "Georgia";
+  font-size: 20pt;
+  border: 1px solid black;
+  text-align: center;
+}
+
+#clueTable  {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.clueData {
+  border: 1px solid black;
+}
+
+#detailHead {
+  text-align: left
+}
+
+.editButton {
+  border-color: white;
+  border-radius: 0px;
+}

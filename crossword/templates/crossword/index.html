@@ -1,0 +1,36 @@
+{% extends 'crossword/base.html' %}
+{% load static %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+      {% for puz in puzzles %}
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+          <div class="caption">
+            <h3>Weekly Crossword</h3>
+            <h5>Published: {{ puz.date_added }}</h5>
+            <h5>Author: {{ puz.author }}</h5>
+            <center><a href="{% url 'detail' puz.pk %}"><img width="150" src="{% static 'crossword/thumbnail.png' %}"></a>
+              <br>
+            <p><a href="{% url 'detail' puz.pk %}" class="btn btn-success" role="button">Play
+              <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+            </a>  <a href="{% url 'show_pdf' puz.pk %}" class="btn btn-info" role="button">Download
+              <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+            </a></p>
+            {% if user %}
+            </a>  <a href="{% url 'delete_puzzle' puz.pk %}" class="btn btn-danger" role="button">Delete
+              <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </a></p>
+            {% endif %}
+            </center>
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
